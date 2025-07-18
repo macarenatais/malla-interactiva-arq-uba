@@ -83,14 +83,15 @@ function render() {
       div.addEventListener("click", () => {
         const estadoActual = estado[m.nombre];
 
-        if (m.promocion && !estadoActual) {
-          estado[m.nombre] = "aprobada";
-        } else if (estadoActual === "aprobada") {
-          delete estado[m.nombre];
+        // Ciclo de estados: vacío -> cursando -> cursada -> aprobada -> vacío
+        if (!estadoActual) {
+          estado[m.nombre] = "cursando";
+        } else if (estadoActual === "cursando") {
+          estado[m.nombre] = "cursada";
         } else if (estadoActual === "cursada") {
           estado[m.nombre] = "aprobada";
         } else {
-          estado[m.nombre] = "cursada";
+          delete estado[m.nombre];
         }
 
         localStorage.setItem("estadoMaterias", JSON.stringify(estado));
@@ -122,6 +123,8 @@ function updateUI() {
       div.classList.add("aprobada");
     } else if (estadoActual === "cursada") {
       div.classList.add("cursada");
+    } else if (estadoActual === "cursando") {
+      div.classList.add("cursando");
     } else if (habilitada) {
       div.classList.add("habilitada");
     } else {
