@@ -23,7 +23,7 @@ h1 {
 }
 
 .nivel {
-  background-color: rgba(252, 247, 214, 0.92); /* amarillo claro con transparencia */
+  background-color: rgba(252, 247, 214, 0.92); /* amarillo más sólido */
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -67,8 +67,14 @@ h1 {
 }
 
 .materia.cursada {
-  background-color: #f2a9cf;
+  background-color: #f2a9cf; /* rosa */
   border: none;
+  color: #333;
+}
+
+.materia.cursando {
+  background-color: #ffd9b3; /* naranja suave */
+  border: 2px solid #ffa366;
   color: #333;
 }
 
