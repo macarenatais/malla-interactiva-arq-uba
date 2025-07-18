@@ -7,7 +7,7 @@ const materias = [
   { nombre: "Filosofía", nivel: 1 },
   { nombre: "T. de Dibujo", nivel: 1 },
 
-  { nombre: "A1", nivel: 2, correlativas: ["ICSE", "IPC", "ICP1", "ICP2", "Matemática", "Filosofía", "T. de Dibujo"] },
+  { nombre: "AI", nivel: 2, correlativas: ["ICSE", "IPC", "ICP1", "ICP2", "Matemática", "Filosofía", "T. de Dibujo"] },
   { nombre: "IAC", nivel: 2, correlativas: ["ICSE", "IPC", "ICP1", "ICP2", "Matemática", "Filosofía", "T. de Dibujo"] },
   { nombre: "SRG", nivel: 2, promocion: true, correlativas: ["ICSE", "IPC", "ICP1", "ICP2", "Matemática", "Filosofía", "T. de Dibujo"] },
   { nombre: "ITC", nivel: 2, correlativas: ["ICSE", "IPC", "ICP1", "ICP2", "Matemática", "Filosofía", "T. de Dibujo"] },
@@ -15,7 +15,7 @@ const materias = [
   { nombre: "FAA", nivel: 2, correlativas: ["ICSE", "IPC", "ICP1", "ICP2", "Matemática", "Filosofía", "T. de Dibujo"] },
   { nombre: "MAT2", nivel: 2, correlativas: ["ICSE", "IPC", "ICP1", "ICP2", "Matemática", "Filosofía", "T. de Dibujo"] },
 
-  { nombre: "A2", nivel: 3, promocion: true, correlativas: ["A1", "SRG", "ITC"] },
+  { nombre: "A1", nivel: 3, promocion: true, correlativas: ["AI", "SRG", "ITC"] },
   { nombre: "RA", nivel: 3, promocion: true, correlativas: ["SRG"] },
   { nombre: "H1", nivel: 3, correlativas: ["IAC"] },
   { nombre: "M1", nivel: 3, promocion: true, correlativas: ["SRG"] },
@@ -23,7 +23,7 @@ const materias = [
   { nombre: "E1", nivel: 3, correlativas: ["ITC", "ITE", "MAT2"] },
   { nombre: "I1", nivel: 3, correlativas: ["ITC", "FAA", "MAT2"] },
 
-  { nombre: "A3", nivel: 4, promocion: true, correlativas: ["A2", "SRG", "ITC"] },
+  { nombre: "A2", nivel: 4, promocion: true, correlativas: ["A1", "SRG", "ITC"] },
   { nombre: "MP", nivel: 4, promocion: true, correlativas: ["A2", "M1", "RA", "IAC", "C1", "I1", "E1"] },
   { nombre: "M2", nivel: 4, promocion: true, correlativas: ["A1", "M1", "RA"] },
   { nombre: "H2", nivel: 4, correlativas: ["A1", "SRG", "H1"] },
@@ -31,7 +31,7 @@ const materias = [
   { nombre: "E2", nivel: 4, correlativas: ["A1", "SRG", "C1", "E1"] },
   { nombre: "I2", nivel: 4, correlativas: ["A1", "SRG", "C1", "I1"] },
 
-  { nombre: "A4", nivel: 5, promocion: true, correlativas: ["A3", "M1", "RA", "IAC", "C1", "I1", "E1"] },
+  { nombre: "A3", nivel: 5, promocion: true, correlativas: ["A2", "M1", "RA", "IAC", "C1", "I1", "E1"] },
   { nombre: "T", nivel: 5, promocion: true, correlativas: ["IAC", "ITC", "ITE", "FAA", "MAT2", "A3", "M2", "MP", "H1", "E1", "I1", "C1"] },
   { nombre: "H3", nivel: 5, correlativas: ["A2", "M1", "RA", "H2"] },
   { nombre: "C3", nivel: 5, correlativas: ["A2", "M1", "RA", "C2"] },
@@ -83,15 +83,14 @@ function render() {
       div.addEventListener("click", () => {
         const estadoActual = estado[m.nombre];
 
-        // Ciclo de estados: vacío -> cursando -> cursada -> aprobada -> vacío
-        if (!estadoActual) {
-          estado[m.nombre] = "cursando";
-        } else if (estadoActual === "cursando") {
-          estado[m.nombre] = "cursada";
+        if (m.promocion && !estadoActual) {
+          estado[m.nombre] = "aprobada";
+        } else if (estadoActual === "aprobada") {
+          delete estado[m.nombre];
         } else if (estadoActual === "cursada") {
           estado[m.nombre] = "aprobada";
         } else {
-          delete estado[m.nombre];
+          estado[m.nombre] = "cursada";
         }
 
         localStorage.setItem("estadoMaterias", JSON.stringify(estado));
@@ -123,8 +122,6 @@ function updateUI() {
       div.classList.add("aprobada");
     } else if (estadoActual === "cursada") {
       div.classList.add("cursada");
-    } else if (estadoActual === "cursando") {
-      div.classList.add("cursando");
     } else if (habilitada) {
       div.classList.add("habilitada");
     } else {
