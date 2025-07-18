@@ -2,7 +2,8 @@ body {
   font-family: 'Quicksand', sans-serif;
   margin: 0;
   padding: 40px 20px;
-  background: #fff0f5; /* fondo rosa claro */
+  background: url("fondo-floral.png") repeat;
+  background-size: 400px;
   color: #333;
 }
 
@@ -11,7 +12,7 @@ h1 {
   margin-bottom: 40px;
   font-size: 36px;
   font-weight: 600;
-  color: #e86ca9; /* rosa claro */
+  color: #e86ca9;
 }
 
 #niveles {
@@ -22,7 +23,7 @@ h1 {
 }
 
 .nivel {
-  background-color: #f1e8ad; /* fondo amarillo clarito */
+  background-color: rgba(252, 247, 214, 0.8); /* amarillo claro con transparencia */
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -34,7 +35,7 @@ h1 {
   font-size: 18px;
   margin-bottom: 12px;
   font-weight: 600;
-  color: #e86ca9; /* mismo rosa que el título */
+  color: #e86ca9;
 }
 
 .materia {
@@ -53,28 +54,24 @@ h1 {
   border-color: #999;
 }
 
-/* ✅ Aprobadas: Violeta claro */
 .materia.aprobada {
-  background-color: #e7d5f8; /* violeta suave */
+  background-color: #e7d5f8;
   border: none;
   color: #333;
 }
 
-/* ✅ Cursadas: Rosa */
 .materia.cursada {
   background-color: #f2a9cf;
   border: none;
   color: #333;
 }
 
-/* 🟡 Habilitada: borde rosa */
 .materia.habilitada {
   background-color: white;
   border: 2px solid #f2a9cf;
   color: #333;
 }
 
-/* ⛔ Bloqueada: borde punteado gris */
 .materia.bloqueada {
   background-color: white;
   border: 2px dashed #ccc;
