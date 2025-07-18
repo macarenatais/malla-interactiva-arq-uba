@@ -2,8 +2,8 @@ body {
   font-family: 'Quicksand', sans-serif;
   margin: 0;
   padding: 40px 20px;
-  background: url("fondo-floral.png") repeat;
-  background-size: 400px;
+  background: url("fondo-floral.png") no-repeat center center fixed;
+  background-size: cover;
   color: #333;
 }
 
@@ -28,6 +28,7 @@ h1 {
   padding: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   min-width: 180px;
+  position: relative;
 }
 
 .nivel h2 {
@@ -36,6 +37,11 @@ h1 {
   margin-bottom: 12px;
   font-weight: 600;
   color: #e86ca9;
+}
+
+.nivel h2::after {
+  content: "🌟";
+  margin-left: 6px;
 }
 
 .materia {
@@ -55,7 +61,7 @@ h1 {
 }
 
 .materia.aprobada {
-  background-color: #e7d5f8;
+  background-color: #eedbfd; /* violeta más claro */
   border: none;
   color: #333;
 }
@@ -76,4 +82,16 @@ h1 {
   background-color: white;
   border: 2px dashed #ccc;
   color: #aaa;
+}
+
+.materia.promocion {
+  position: relative;
+}
+
+.materia.promocion::after {
+  content: "🌟";
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  font-size: 14px;
 }
