@@ -23,7 +23,7 @@ h1 {
 }
 
 .nivel {
-  background-color: rgba(252, 247, 214, 0.8); /* amarillo claro con transparencia */
+  background-color: rgba(252, 247, 214, 0.92); /* amarillo claro con transparencia */
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
