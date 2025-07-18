@@ -40,10 +40,11 @@ const materias = [
   { nombre: "PU", nivel: 5, correlativas: ["A3", "M1", "RA", "H1", "E1", "I1", "H2"] },
   { nombre: "PPA", nivel: 5, promocion: true, correlativas: ["A3", "MP", "M2", "H2", "C2", "E2", "I2"] },
 
+  { nombre: "A4", nivel: 6, promocion: true, correlativas: ["T", "MP", "PPA"] },
   { nombre: "Proy. Urb.", nivel: 6, promocion: true, correlativas: ["A4", "H1", "C1", "E1", "I1", "T", "H3", "C3", "E3", "I3"] },
   { nombre: "Proy. Arq.", nivel: 6, promocion: true, correlativas: ["Proy. Urb."] },
   { nombre: "DLO", nivel: 6, correlativas: ["A4", "H1", "C1", "E1", "I1", "H2", "C2", "E2", "I2", "C3", "I3"] },
-  { nombre: "Optativas", nivel: 6, correlativas: ["A2", "M1", "RA", "IAC", "C1", "I1", "E1"] }
+  { nombre: "Optativas", nivel: 6 }
 ];
 
 const estado = JSON.parse(localStorage.getItem("estadoMaterias")) || {};
@@ -85,12 +86,14 @@ function render() {
 
         if (m.promocion && !estadoActual) {
           estado[m.nombre] = "aprobada";
-        } else if (estadoActual === "aprobada") {
-          delete estado[m.nombre];
+        } else if (!estadoActual) {
+          estado[m.nombre] = "cursando";
+        } else if (estadoActual === "cursando") {
+          estado[m.nombre] = "cursada";
         } else if (estadoActual === "cursada") {
           estado[m.nombre] = "aprobada";
         } else {
-          estado[m.nombre] = "cursada";
+          delete estado[m.nombre];
         }
 
         localStorage.setItem("estadoMaterias", JSON.stringify(estado));
@@ -122,6 +125,8 @@ function updateUI() {
       div.classList.add("aprobada");
     } else if (estadoActual === "cursada") {
       div.classList.add("cursada");
+    } else if (estadoActual === "cursando") {
+      div.classList.add("cursando");
     } else if (habilitada) {
       div.classList.add("habilitada");
     } else {
