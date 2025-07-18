@@ -97,3 +97,14 @@ h1 {
   right: 8px;
   font-size: 14px;
 }
+
+/* Nueva clase para materias que estás cursando */
+.materia.cursando {
+  background-color: #fff8b3; /* amarillo claro */
+  border: 2px solid #ffea00; /* borde amarillo intenso */
+  color: #333;
+}
+
+.materia.cursando:hover {
+  border-color: #ffd600; /* borde amarillo más fuerte */
+}
